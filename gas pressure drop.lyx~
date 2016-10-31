@@ -70,6 +70,14 @@
 
 \begin_body
 
+\begin_layout Section
+Gas transmission pipelines
+\end_layout
+
+\begin_layout Subsection
+Presusre drop
+\end_layout
+
 \begin_layout Standard
 Panhandle equation in weired system of units
 \begin_inset Formula 
@@ -138,24 +146,57 @@ C and 1 atm), and
  is the compressibility factor.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 pipe size
+\end_layout
+
+\begin_layout Standard
+The average diameter of a gas transmission pipeline is calculated by
 \begin_inset Formula 
 \[
-Q=\frac{\pi d^{2}}{4}v_{g},
+d=\left(\frac{4Q}{\pi v_{g}}\right)^{0.5},
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $d$
+\end_inset
 
+ [m] is the inside diameter of the pipe, 
+\begin_inset Formula $Q$
+\end_inset
+
+ [m
+\begin_inset Formula $^{3}$
+\end_inset
+
+/s] is the volumetric gas flow rate, and 
+\begin_inset Formula $v_{g}$
+\end_inset
+
+ [m/s] is the 
+\end_layout
+
+\begin_layout Standard
+Compressor stages
+\end_layout
+
+\begin_layout Standard
+I assumed a multi-stage compressor with inter-stage cooling.
+ The number of stages are calculated by
 \begin_inset Formula 
 \[
-d=\left(\frac{4Q}{\pi v_{g}}\right)^{0.5}
+n_{stage}=\frac{\ln\left(p_{in}/p_{out}\right)}{\ln r_{comp}},
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $r_{comp}$
+\end_inset
 
+ is the compression ratio for each compressor.
 \end_layout
 
 \end_body

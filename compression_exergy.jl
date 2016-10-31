@@ -4,8 +4,8 @@
 # for CO2, the maxiumum velocity is 50 ft/s
 # minimum gas velocity is 10 to 15 ft/s
 # source: http://petrowiki.org/Pipeline_design_consideration_and_standards#Gas_line_sizing
-using Plots, Roots
-include("CoolProp.jl")
+using Plots, Roots, CoolProp
+# include("CoolProp.jl")
 
 # constants
 R=8.314 # J/(mol.K) gas constants
@@ -21,12 +21,14 @@ sm3s_to_mmscfd= 3.05119008
 m_to_inch=39.3701
 
 # reservoir condition
-p_res=300e5 # Pa
+p_res=280e5 # Pa
 T_res= 90+273.15 # K
 gas_type="CO2"
+# a mixture can be defined as:
+# gas_type="CO2[0.9]&N2[0.1]"
 
 # pipe line specifications
-Q_g= 1.0 # m^3/s at reservoir condition
+Q_g= 109260/(24*3600) # m^3/s at reservoir condition
 L_pipe=2000.0 # m
 n_segments=100
 T_pipe=35+273.15 # K pipe line temperature
@@ -40,9 +42,12 @@ Q_g_molar=Q_g*C_gas_res # mol/s molar flow rate
 # at the final segment of the pipe
 if gas_type=="CO2"
   v_g=50*0.3048 # ft/s to m/s
-elseif gas_type=="N2"
+elseif gas_type=="N2" || gas_type=="CH4"
+  v_g=80*0.3048 # ft/s to m/s
+else
   v_g=80*0.3048 # ft/s to m/s
 end
+
 
 C_gas_end=CoolProp.PropsSI("DMOLAR", "T", T_pipe,
   "P", p_end, gas_type) # gas density mol/m3
@@ -60,17 +65,12 @@ C_gas_res=CoolProp.PropsSI("DMOLAR", "T", T_res,
   "P", p_res, gas_type) # gas density mol/m3
 Q_g_molar=Q_g*C_gas_res # mol/s molar flow rate
 
-# calculate the pipe size based on the maximum velocity
-# at the final segment of the pipe
-if gas_type=="CO2"
-  v_g=50*0.3048 # ft/s to m/s
-elseif gas_type=="N2"
-  v_g=80*0.3048 # ft/s to m/s
-end
-
 C_gas_end=CoolProp.PropsSI("DMOLAR", "T", T_pipe,
   "P", p_end, gas_type) # gas density mol/m3
 Q_end=Q_g_molar/C_gas_end # m^3/s flow at the end segment
+C_gas_std=CoolProp.PropsSI("DMOLAR", "T", T_ref,
+  "P", p_ref, gas_type) # gas density mol/m3
+Q_g_std=Q_g_molar/C_gas_std
 d=(4*Q_end/(π*v_g))^0.5 # m pipe diameter
 d_inch=d*m_to_inch
 Q_g= 1.0 # m^3/s at reservoir condition
@@ -83,14 +83,6 @@ p_end=80e5 # pressure at the end of pipe line
 C_gas_res=CoolProp.PropsSI("DMOLAR", "T", T_res,
   "P", p_res, gas_type) # gas density mol/m3
 Q_g_molar=Q_g*C_gas_res # mol/s molar flow rate
-
-# calculate the pipe size based on the maximum velocity
-# at the final segment of the pipe
-if gas_type=="CO2"
-  v_g=50*0.3048 # ft/s to m/s
-elseif gas_type=="N2"
-  v_g=80*0.3048 # ft/s to m/s
-end
 
 C_gas_end=CoolProp.PropsSI("DMOLAR", "T", T_pipe,
   "P", p_end, gas_type) # gas density mol/m3
@@ -107,7 +99,7 @@ for i in n_segments:-1:1
   Z_gas=CoolProp.PropsSI("Z", "T", T_pipe,"P", p[i+1], gas_type) # gas compressibility factor
   C_gas=CoolProp.PropsSI("DMOLAR", "T", T_pipe, "P", p[i+1], gas_type) # gas density mol/m3
   p[i]=sqrt((p[i+1]*pa_to_psi)^2+sg_gas^0.961*Z_gas*L_pipe*m_to_mile*T_pipe*K_to_degR
-  *(Q_g_molar/C_gas*sm3s_to_mmscfd/(0.028*e_pipe*d_inch^2.53))^(1.0/0.51))/pa_to_psi
+  *(Q_g_molar/C_g*sm3s_to_mmscfd/(0.028*e_pipe*d_inch^2.53))^(1.0/0.51))/pa_to_psi
 end
 
 plot(linspace(0, L_pipe, n_segments+1)/1000, p/1e5,

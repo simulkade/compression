@@ -70,6 +70,14 @@
 
 \begin_body
 
+\begin_layout Section
+Gas transmission pipelines
+\end_layout
+
+\begin_layout Subsection
+Presusre drop
+\end_layout
+
 \begin_layout Standard
 Panhandle equation in weired system of units
 \begin_inset Formula 
@@ -90,7 +98,7 @@ Q_{h}=0.028E\left[\frac{p_{1}^{2}-p_{2}^{2}}{S^{0.961}ZTL_{m}}\right]^{0.51}d^{2
 the upstream pressure is calculated by:
 \begin_inset Formula 
 \[
-p_{1}=\left(S^{0.961}ZTL_{m}\left(\frac{Q_{h}}{0.028Ed^{2.53}}\right)^{1/0.51}+p_{2}^{2}\right)^{0.5}
+p_{1}=\left(S^{0.961}ZTL_{m}\left(\frac{Q_{g}}{0.028Ed^{2.53}}\right)^{1/0.51}+p_{2}^{2}\right)^{0.5}
 \]
 
 \end_inset
@@ -103,11 +111,11 @@ where
 \begin_inset Formula $Q_{g}$
 \end_inset
 
- is the gas flow rate in MMscfD, 
+ [MMscfD] is the gas flow rate, 
 \begin_inset Formula $d$
 \end_inset
 
- in the internal pipe diameter in inch, 
+ is the internal pipe diameter in inch, 
 \begin_inset Formula $p$
 \end_inset
 
@@ -138,24 +146,36 @@ C and 1 atm), and
  is the compressibility factor.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 pipe size
+\end_layout
+
+\begin_layout Standard
+The average diameter of a gas transmission pipeline is calculated by
 \begin_inset Formula 
 \[
-Q=\frac{\pi d^{2}}{4}v_{g},
+d=\left(\frac{4Q}{\pi v_{g}}\right)^{0.5},
 \]
 
 \end_inset
 
-
-\begin_inset Formula 
-\[
-d=\left(\frac{4Q}{\pi v_{g}}\right)^{0.5}
-\]
-
+where 
+\begin_inset Formula $d$
 \end_inset
 
+ [m] is the inside diameter of the pipe, 
+\begin_inset Formula $Q$
+\end_inset
 
+ [m
+\begin_inset Formula $^{3}$
+\end_inset
+
+/s] is the volumetric gas flow rate, and 
+\begin_inset Formula $v_{g}$
+\end_inset
+
+ [m/s] is the 
 \end_layout
 
 \begin_layout Standard
