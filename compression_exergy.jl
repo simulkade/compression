@@ -29,8 +29,8 @@ gas_type="CO2"
 
 # pipe line specifications
 Q_g= 109260/(24*3600) # m^3/s at reservoir condition
-L_pipe=2000.0 # m
-n_segments=100
+L_pipe=200000.0 # m
+n_segments=200
 T_pipe=35+273.15 # K pipe line temperature
 p_end=80e5 # pressure at the end of pipe line
 # p_sat_gas=CoolProp.PropsSI("P","T",T_pipe,"Q",0.0,gas_type)
@@ -55,11 +55,6 @@ Q_end=Q_g_molar/C_gas_end # m^3/s flow at the end segment
 d=(4*Q_end/(π*v_g))^0.5 # m pipe diameter
 d_inch=d*m_to_inch
 
-Q_g= 1.0 # m^3/s at reservoir condition
-L_pipe=2000.0 # m
-n_segments=100
-T_pipe=35+273.15 # K pipe line temperature
-p_end=80e5 # pressure at the end of pipe line
 # p_sat_gas=CoolProp.PropsSI("P","T",T_pipe,"Q",0.0,gas_type)
 C_gas_res=CoolProp.PropsSI("DMOLAR", "T", T_res,
   "P", p_res, gas_type) # gas density mol/m3
@@ -73,12 +68,7 @@ C_gas_std=CoolProp.PropsSI("DMOLAR", "T", T_ref,
 Q_g_std=Q_g_molar/C_gas_std
 d=(4*Q_end/(π*v_g))^0.5 # m pipe diameter
 d_inch=d*m_to_inch
-Q_g= 1.0 # m^3/s at reservoir condition
-L_pipe=200000.0 # m
-n_segments=100
-T_pipe=35+273.15 # K pipe line temperature
 e_pipe=0.9 # pipe efficiency
-p_end=80e5 # pressure at the end of pipe line
 # p_sat_gas=CoolProp.PropsSI("P","T",T_pipe,"Q",0.0,gas_type)
 C_gas_res=CoolProp.PropsSI("DMOLAR", "T", T_res,
   "P", p_res, gas_type) # gas density mol/m3
@@ -88,7 +78,7 @@ C_gas_end=CoolProp.PropsSI("DMOLAR", "T", T_pipe,
   "P", p_end, gas_type) # gas density mol/m3
 Q_end=Q_g_molar/C_gas_end # m^3/s flow at the end segment
 d=(4*Q_end/(π*v_g))^0.5 # m pipe diameter
-d_inch=d*m_to_inch
+d_inch=d*m_to_inch+5
 
 # start the calculations here
 p=zeros(n_segments+1)
@@ -98,8 +88,8 @@ for i in n_segments:-1:1
     CoolProp.PropsSI("DMASS", "T", T_ref,"P", p_ref, "Air")
   Z_gas=CoolProp.PropsSI("Z", "T", T_pipe,"P", p[i+1], gas_type) # gas compressibility factor
   C_gas=CoolProp.PropsSI("DMOLAR", "T", T_pipe, "P", p[i+1], gas_type) # gas density mol/m3
-  p[i]=sqrt((p[i+1]*pa_to_psi)^2+sg_gas^0.961*Z_gas*L_pipe*m_to_mile*T_pipe*K_to_degR
-  *(Q_g_molar/C_g*sm3s_to_mmscfd/(0.028*e_pipe*d_inch^2.53))^(1.0/0.51))/pa_to_psi
+  p[i]=sqrt((p[i+1]*pa_to_psi)^2+sg_gas^0.961*Z_gas*L_pipe/n_segments*m_to_mile*T_pipe*K_to_degR
+  *(Q_g_std*sm3s_to_mmscfd/(0.028*e_pipe*d_inch^2.53))^(1.0/0.51))/pa_to_psi
 end
 
 plot(linspace(0, L_pipe, n_segments+1)/1000, p/1e5,
@@ -135,7 +125,7 @@ eta_comp=0.7
 eta_driver=0.9
 eta_pp=0.4
 w_real_transport=Q_g_molar*w_min_transport/(eta_comp*eta_driver*eta_pp)
-
+println("Compression exergy for gass transmission with a flow of $Q_g m3/s in a $d_inch inch pipe line is $w_real_transport W")
 # compression loop for CO2 injection
 p_wellhead=p[end]
 n_stage_well=Int(round(log(p_res/p_wellhead)/log(comp_ratio)))
@@ -161,6 +151,8 @@ eta_comp=0.7
 eta_driver=0.9
 eta_pp=0.4
 w_real_well=Q_g_molar*w_min_well/(eta_comp*eta_driver*eta_pp)
+println("Compression exergy for gas injection with a flow of $Q_g m3/s and a reservoir pressure of $p_res Pa is $w_real_well W")
+
 
 
 # rho_gas=CoolProp.PropsSI("DMOLAR", "T", temperature_in_K,
