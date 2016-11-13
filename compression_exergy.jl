@@ -81,6 +81,15 @@ d=(4*Q_end/(π*v_g))^0.5 # m pipe diameter
 d_inch=d*m_to_inch+5
 
 # start the calculations here
+# workflow:
+# choose a few pipe diameters
+# design the pipe thickness: X60 grade,
+# yield strength: Sy=413 MPa (60000 psi)
+# t=P [psi]* d_pipe (inch, outside)/(2*F*E*Sy)
+# F=0.72 (average), E=0.6-1.0 weld joint factor
+# standard nominal sizes: 10:2:36 (most of the time equal to the OD)
+# calculate the pressure drop and pipe material exergy
+
 p=zeros(n_segments+1)
 p[end]=p_end
 for i in n_segments:-1:1
