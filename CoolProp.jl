@@ -1,6 +1,11 @@
 module CoolProp
 
-const lib_coolprop_path="/home/ali/projects/compression/libCoolProp.so"
+if is_linux()
+  const lib_coolprop_path=joinpath(Pkg.dir(), "JCoolprop", "deps", "libCoolProp.so")
+elseif is_windows()
+  const lib_coolprop_path=joinpath(Pkg.dir(), "JCoolprop", "deps", "libCoolProp.dll")
+end
+
 export PropsSI, PhaseSI, get_global_param_string, get_parameter_information_string,get_fluid_param_string,set_reference_stateS, get_param_index, get_input_pair_index, F2K, K2F, HAPropsSI, AbstractState_factory, AbstractState_free, AbstractState_set_fractions, AbstractState_update, AbstractState_keyed_output
 
 # Check the current Julia version to make this Julia 0.4 code compatible with older version

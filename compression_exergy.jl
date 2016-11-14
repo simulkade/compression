@@ -4,7 +4,7 @@
 # for CO2, the maxiumum velocity is 50 ft/s
 # minimum gas velocity is 10 to 15 ft/s
 # source: http://petrowiki.org/Pipeline_design_consideration_and_standards#Gas_line_sizing
-using Plots, Roots, CoolProp
+using Plots, Roots, CoolProp, DataFrames
 # include("CoolProp.jl")
 
 # constants
@@ -14,6 +14,12 @@ T_ref=21.0+273.15 # reference temperature
 ex_steel_pipe=60e6 # J/kg steel Szargut
 rho_steel=8000 # kg/m3 average value (a bit high)
 t_life_pipe=30*365*24*3600 # [s] project life time
+results_out=Dict("flow rate"=>zeros(0), "pipe diamter"=>zeros(0),
+            "transport comp stages"=>zeros(0), "transport exergy"=>zeros(0),
+            "steel exergy"=>zeros(0), "injection exergy"=>zeros(0),
+            "preessure drop bar"=>zeros(0), "pipe length"=>zeros(0),
+            "pipe thickness"=>zeros(0), "transport exergy th"=>zeros(0),
+            "injection exergy th"=>zeros(0))
 # unit conversion
 m_to_mile=0.000621371
 K_to_degR=1.8
@@ -26,9 +32,10 @@ m_to_inch=39.3701
 # reservoir condition
 p_res=280e5 # Pa
 T_res= 90+273.15 # K
-gas_type="CO2"
+# gas_type="CO2"
+# gas_type="N2"
 # a mixture can be defined as:
-# gas_type="CO2[0.9]&N2[0.1]"
+gas_type="CO2[0.7]&N2[0.3]"
 
 # pipe line specifications
 Q_g= 109260/(24*3600) # m^3/s at reservoir condition
@@ -175,9 +182,22 @@ for j in 1:5
   eta_pp=0.4
   w_real_well=Q_g_molar*w_min_well/(eta_comp*eta_driver*eta_pp)
   println("Compression exergy for gas injection with a flow of $Q_g m3/s and a reservoir pressure of $p_res Pa is $w_real_well W")
+  push!(results_out["flow rate"], Q_g)
+  push!(results_out["pipe diamter"], d_inch)
+  push!(results_out["transport comp stages"], n_stage)
+  push!(results_out["transport exergy"], w_real_transport)
+  push!(results_out["steel exergy"], ex_steel)
+  push!(results_out["injection exergy"], w_real_well)
+  push!(results_out["preessure drop bar"], dp_pipe/1e5)
+  push!(results_out["pipe length"], L_pipe)
+  push!(results_out["pipe thickness"], t_pipe)
+  push!(results_out["transport exergy th"], w_min_transport)
+  push!(results_out["injection exergy th"], w_min_well)
 end
+d_results=DataFrame(results_out)
+writetable("result_$gas_type.csv", d_results)
 
-
+# writedlm("result_$gas_type.csv", results_out, ",")
 # rho_gas=CoolProp.PropsSI("DMOLAR", "T", temperature_in_K,
 #   "P", pressure_in_Pa, gas_type) # gas density mol/m3
 # s_gas=CoolProp.PropsSI("SMOLAR", "T", temperature_in_K,
