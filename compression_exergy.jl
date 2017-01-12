@@ -33,9 +33,9 @@ m_to_inch=39.3701
 p_res=280e5 # Pa
 T_res= 90+273.15 # K
 # gas_type="CO2"
-# gas_type="N2"
+gas_type="N2"
 # a mixture can be defined as:
-gas_type="CO2[0.7]&N2[0.3]"
+#gas_type="CO2[0.7]&N2[0.3]"
 
 # pipe line specifications
 Q_g= 109260/(24*3600) # m^3/s at reservoir condition
@@ -191,8 +191,8 @@ for j in 1:5
   push!(results_out["preessure drop bar"], dp_pipe/1e5)
   push!(results_out["pipe length"], L_pipe)
   push!(results_out["pipe thickness"], t_pipe)
-  push!(results_out["transport exergy th"], w_min_transport)
-  push!(results_out["injection exergy th"], w_min_well)
+  push!(results_out["transport exergy th"], Q_g_molar*w_min_transport)
+  push!(results_out["injection exergy th"], Q_g_molar*w_min_well)
 end
 d_results=DataFrame(results_out)
 writetable("result_$gas_type.csv", d_results)
