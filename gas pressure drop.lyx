@@ -71,15 +71,120 @@
 \begin_body
 
 \begin_layout Section
-Gas transmission pipelines
-\end_layout
-
-\begin_layout Subsection
-Presusre drop
+Compression power requirement in gas EOR projects
 \end_layout
 
 \begin_layout Standard
-Panhandle equation in weired system of units
+The energy requirement for the compression of the gas phase for the transport
+ of the gas to the reservoir location from the source, e.g., a power plant
+ that supplies CO
+\begin_inset Formula $_{2}$
+\end_inset
+
+, and the injection of the transported gas into the reservoir is the main
+ contributor to the high energy demand of a gas EOR project.
+ The energy requirement for the transport depends on the flow rate of the
+ gas stream, the length, diameter, and roughness of the pipeline, and the
+ physical properties of the gas phase.
+ The compression energy for the injection of the gas is a function of the
+ gas type and the reservoir pressure.
+ In the following sections, we describe a simple procedure for the design
+ of the compressor stations and pipelines for the transport and injection
+ of a known flow rate of an EOR gas.
+ We later use the procedure to quantify the energy requirement for a gas
+ EOR project.
+\end_layout
+
+\begin_layout Section
+Gas transmission pipelines
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-flow-diagram"
+
+\end_inset
+
+ shows the flow diagram for the transport and injection of gas into an oil
+ reservoir.
+ The gas stream, which is assumed to be at atmospheric pressure and environmenta
+l temperature, is compressed in a multi-stage compressor station with inter-cool
+ers (a heat exchanger that decreases the temperature of the compressed gas
+ stream before entering a new compression stage).
+ The gas is delivered at the well head at a pressure of 80 bar and the environme
+ntal temperature.
+ The gas is injected into the oil reservoir by means of another multi-stage
+ compressor station.
+ The compressors are driven by electrical drivers with electrical energy
+ that comes from a fossil fuel power plant.
+ This assumption facilitates the calculation of the CO
+\begin_inset Formula $_{2}$
+\end_inset
+
+ emission of the gas EOR process.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename g4472.png
+	lyxscale 50
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-flow-diagram"
+
+\end_inset
+
+The flow diagram for the transport and injection of gas into an oil reservoir.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we first design a gas transport pipeline for a known flow rate of
+ a specified gas at known operating conditions.
+ Then, we calculate the pressure drop in the gas pipeline, which we use
+ later in the calculation of the compression power for the transmission
+ of the gas stream.
+ At the end, we study the effect of the pipe diameter on the power requirement
+ of the compressor for transporting the same amount of gas.
+\end_layout
+
+\begin_layout Subsection
+Pressure drop
+\end_layout
+
+\begin_layout Standard
+Different equations are suggested for the calculations of pressure drop
+ as a function of pipeline and flow specifications, which must be specified
+ in the prescribed unit for the specific equation.
+ Here, we use the Panhandle equation that reads
 \begin_inset Formula 
 \[
 Q_{h}=0.028E\left[\frac{p_{1}^{2}-p_{2}^{2}}{S^{0.961}ZTL_{m}}\right]^{0.51}d^{2.53}
@@ -95,7 +200,11 @@ Q_{h}=0.028E\left[\frac{p_{1}^{2}-p_{2}^{2}}{S^{0.961}ZTL_{m}}\right]^{0.51}d^{2
 
 \end_inset
 
-the upstream pressure is calculated by:
+the upstream pressure (
+\begin_inset Formula $p_{1}$
+\end_inset
+
+[psia]) is calculated by:
 \begin_inset Formula 
 \[
 p_{1}=\left(S^{0.961}ZTL_{m}\left(\frac{Q_{g}}{0.028Ed^{2.53}}\right)^{1/0.51}+p_{2}^{2}\right)^{0.5}
@@ -112,50 +221,50 @@ where
 \end_inset
 
  [MMscfD] is the gas flow rate, 
-\begin_inset Formula $d$
+\begin_inset Formula $p_{2}$
 \end_inset
 
- is the internal pipe diameter in inch, 
-\begin_inset Formula $p$
-\end_inset
-
- is pressure in psia, 
+ [psia] is pressure at the outlet end of the pipeline, 
 \begin_inset Formula $L_{m}$
 \end_inset
 
- is the pipe length in mile, 
+ [mile] is the pipe length, 
 \begin_inset Formula $T$
 \end_inset
 
- is temperature in 
+ [
 \begin_inset Formula $^{o}$
 \end_inset
 
-R, 
+R] is temperature, 
 \begin_inset Formula $S$
 \end_inset
 
- is the specific gravity of the gas (at 21
+ [-] is the specific gravity of the gas (at 21
 \begin_inset Formula $^{o}$
 \end_inset
 
-C and 1 atm), and 
+C and 1 atm), 
 \begin_inset Formula $Z$
 \end_inset
 
- is the compressibility factor.
+ is the compressibility factor, and 
+\begin_inset Formula $d$
+\end_inset
+
+ [inch] is the internal pipe diameter which is discussed in the next section.
 \end_layout
 
 \begin_layout Subsection
-pipe size
+pipe diameter
 \end_layout
 
 \begin_layout Standard
 The average diameter of a gas transmission pipeline is calculated by
 \begin_inset Formula 
-\[
+\begin{equation}
 d=\left(\frac{4Q}{\pi v_{g}}\right)^{0.5},
-\]
+\end{equation}
 
 \end_inset
 
@@ -175,16 +284,212 @@ where
 \begin_inset Formula $v_{g}$
 \end_inset
 
- [m/s] is the 
+ [m/s] is the average velocity of the gas in the pipeline.
+ We prefer to choose larger velocities to make the pipeline diameter as
+ small as possible and minimize the costs of the pipe material.
+ However, choosing a large gas velocity increases the noise and corrosion
+ in the pipeline.
+ Additionally, a high gas velocity corresponds to a higher friction and
+ a larger pressure drop in the pipeline, which increases the power consumption
+ in the compressors.
+ Here, we design the pipeline for the highest permitted velocity, shown
+ in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Maximum-gas-velocity"
+
+\end_inset
+
+, and then study the effect of choosing larger pipe diameters on the compression
+ power requirements.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Maximum-gas-velocity"
+
+\end_inset
+
+Maximum gas velocity for the transport pipeline design
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Velocity [ft/s]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Velocity [m/s]
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CO
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N
+\begin_inset Formula $_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CH
+\begin_inset Formula $_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Compressor stages
 \end_layout
 
 \begin_layout Standard
-I assumed a multi-stage compressor with inter-stage cooling.
- The number of stages are calculated by
+The number of stages that is required to compress a gas stream from pressure
+ 
+\begin_inset Formula $p_{in}$
+\end_inset
+
+ to pressure 
+\begin_inset Formula $p_{out}$
+\end_inset
+
+ is calculated by
 \begin_inset Formula 
 \[
 n_{stage}=\frac{\ln\left(p_{in}/p_{out}\right)}{\ln r_{comp}},
@@ -197,6 +502,12 @@ where
 \end_inset
 
  is the compression ratio for each compressor.
+ The number of compressors must be an integer number.
+ Therefore, we choose the floor of 
+\begin_inset Formula $n_{stage}$
+\end_inset
+
+ as the number of compressors.
 \end_layout
 
 \end_body
