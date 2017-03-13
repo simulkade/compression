@@ -3,11 +3,11 @@
 # the velocity range is 60 to 80 ft/s
 # for CO2, the maxiumum velocity is 50 ft/s
 # minimum gas velocity is 10 to 15 ft/s
-# source: http://petrowiki.org/Pipeline_design_consideration_and_standards#Gas_line_sizing
+# %% source: http://petrowiki.org/Pipeline_design_consideration_and_standards#Gas_line_sizing
 using Plots, Roots, CoolProp, DataFrames
 # include("CoolProp.jl")
 
-# constants
+# %% constants
 R=8.314 # J/(mol.K) gas constants
 p_ref=101325 # 1atm in Pa
 T_ref=21.0+273.15 # reference temperature
@@ -20,7 +20,7 @@ results_out=Dict("flow rate"=>zeros(0), "pipe diamter"=>zeros(0),
             "preessure drop bar"=>zeros(0), "pipe length"=>zeros(0),
             "pipe thickness"=>zeros(0), "transport exergy th"=>zeros(0),
             "injection exergy th"=>zeros(0))
-# unit conversion
+# %% unit conversion
 m_to_mile=0.000621371
 K_to_degR=1.8
 pa_to_psi=0.000145038
@@ -29,7 +29,7 @@ m3_to_ft3=35.3147
 sm3s_to_mmscfd= 3.05119008
 m_to_inch=39.3701
 
-# reservoir condition
+# %% reservoir condition
 p_res=280e5 # Pa
 T_res= 90+273.15 # K
 # gas_type="CO2"

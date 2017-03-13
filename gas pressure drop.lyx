@@ -498,7 +498,7 @@ n_{stage}=\frac{\ln\left(p_{in}/p_{out}\right)}{\ln r_{comp}},
 \end_inset
 
 where 
-\begin_inset Formula $r_{comp}$
+\begin_inset Formula $r_{comp}=p_{out}/p_{in}$
 \end_inset
 
  is the compression ratio for each compressor.
@@ -508,6 +508,326 @@ where
 \end_inset
 
  as the number of compressors.
+ We choose a compression ratio of 3.5 here.
+\end_layout
+
+\begin_layout Subsection
+Compression power (exergy) requirement
+\end_layout
+
+\begin_layout Standard
+The minimum compression power is required for an isentropic compressor,
+ i.e., a reversible adiabatic compression process.
+ Using this assumption and with known gas type (or composition 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+), input temperature 
+\begin_inset Formula $T_{in}$
+\end_inset
+
+ [K], input pressure 
+\begin_inset Formula $p_{in}$
+\end_inset
+
+ [K], and compression ration 
+\begin_inset Formula $r_{comp}$
+\end_inset
+
+, we first quantify the minimum energy requirement of a compressor in the
+ following steps:
+\end_layout
+
+\begin_layout Enumerate
+Calculate the output pressure: 
+\begin_inset Formula $p_{out}=r_{comp}p_{in}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Calculate the entropy 
+\begin_inset Formula $S_{in}\left(p_{in},T_{in},x_{i}\right)$
+\end_inset
+
+ and enthalpy 
+\begin_inset Formula $H_{in}\left(p_{in},T_{in},x_{i}\right)$
+\end_inset
+
+ of the input gas stream using the physical property package CoolProp.
+\end_layout
+
+\begin_layout Enumerate
+Calculate the output temperature 
+\begin_inset Formula $T_{out}$
+\end_inset
+
+ [K] by solving the following nonlinear equation: 
+\begin_inset Formula $S_{in}\left(p_{in},T_{in},x_{i}\right)-S_{out}\left(p_{out},T_{out},x_{i}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Calculate the enthalpy of the output -compressed- gas stream 
+\begin_inset Formula $H_{out}\left(p_{out},T_{out},x_{i}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Calculate the isentropic compression (theoretical) work: 
+\begin_inset Formula $W_{th}=H_{out}-H_{in}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The theoretical compression work can be converted to a practical value by
+ considering the efficiency factor of the compressor, its electrical driver,
+ and the efficiency factor for electricity production, 
+\begin_inset Formula $\eta_{comp}$
+\end_inset
+
+, 
+\begin_inset Formula $\eta_{driver}$
+\end_inset
+
+, and 
+\begin_inset Formula $\eta_{pp}$
+\end_inset
+
+ respectively.
+ Typical values for these efficiency factors are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Typical-values-etta"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Typical-values-etta"
+
+\end_inset
+
+Typical values for the efficiency factors of compressors, electrical drivers,
+ and power plants
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Device
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Compressor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Electrical driver
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Power plant
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Efficiency factor (%)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Other exergy requirements
+\end_layout
+
+\begin_layout Standard
+Besides the power requirement in the compressors, the drilling operation
+ and production and installation of the pipes require a considerable amount
+ of exergy.
+ Here, we only calculate the exergy requirement for the production of steel
+ pipes.
+ To that end, we first need to calculate the weight of the gas transport
+ pipeline, which depends on the pipe thickness that can be calculated by
+\begin_inset Formula 
+\[
+t_{pipe}=\frac{p_{design}OD_{pipe}}{2FS_{y}E},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $t_{pipe}$
+\end_inset
+
+ [inch] is the thickness of the pipe, 
+\begin_inset Formula $p_{design}$
+\end_inset
+
+ [psi] is the design pressure, 
+\begin_inset Formula $OD_{pipe}$
+\end_inset
+
+ [inch] is the outside diameter of the pipe, 
+\begin_inset Formula $S_{y}$
+\end_inset
+
+ [psi] is the yield strength of the pipe material (60000 psi for X60 steel
+ pipe), 
+\begin_inset Formula $F$
+\end_inset
+
+ [-] is and efficiency factor with an average value of 0.72, and 
+\begin_inset Formula $E$
+\end_inset
+
+ [-] is the weld joint factor with an average value between 0.6 to 1.0 (here
+ we choose 0.8).
+ The weight of the pipe is calculated by
+\begin_inset Formula 
+\[
+m_{pipe}=\frac{\pi}{4}\left(\left(d_{pipe}+t_{pipe}\right)^{2}-d_{pipe}^{2}\right)L_{pipe}\rho_{steel},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho_{steel}$
+\end_inset
+
+ [kg/m
+\begin_inset Formula $^{3}$
+\end_inset
+
+] is the density of steel.
+ The exergy requirement for the production of steel and production of a
+ pipe is reported by Szargut to be 
+\begin_inset Formula $ex_{pipe}=$
+\end_inset
+
+60
+\begin_inset Formula $\times$
+\end_inset
+
+10
+\begin_inset Formula $^{6}$
+\end_inset
+
+ J/kg.
+ We assume that the pipeline will be in operation for a life span of 
+\begin_inset Formula $t_{life}=30$
+\end_inset
+
+ years.
+ Then we can calculate the exergy flow of the pipeline 
+\begin_inset Formula $\dot{Ex}_{pipe}$
+\end_inset
+
+ [J/s] by
+\begin_inset Formula 
+\[
+\dot{Ex}_{pipe}=\frac{m_{pipe}ex_{pipe}}{t_{life}}.
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
