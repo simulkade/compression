@@ -815,10 +815,14 @@ where
 \end_inset
 
  years.
- Then we can calculate the exergy flow of the pipeline by
+ Then we can calculate the exergy flow of the pipeline 
+\begin_inset Formula $\dot{Ex}_{pipe}$
+\end_inset
+
+ [J/s] by
 \begin_inset Formula 
 \[
-Ex_{pipe}=\frac{m_{pipe}ex_{pipe}}{t_{life}}.
+\dot{Ex}_{pipe}=\frac{m_{pipe}ex_{pipe}}{t_{life}}.
 \]
 
 \end_inset

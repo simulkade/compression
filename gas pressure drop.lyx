@@ -601,8 +601,15 @@ The theoretical compression work can be converted to a practical value by
 \begin_inset Formula $\eta_{pp}$
 \end_inset
 
- respectively.
- Typical values for these efficiency factors are shown in Table 
+ respectively, i.e.,
+\begin_inset Formula 
+\[
+W_{pr}=\frac{W_{th}}{\eta_{comp}\eta_{driver}\eta_{pp}}.
+\]
+
+\end_inset
+
+Typical values for these efficiency factors are shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Typical-values-etta"
